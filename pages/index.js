@@ -5,13 +5,13 @@ import Results from "../components/Results";
 import requests from "../utils/requests";
 
 export default function Home({ results }) {
-  console.log(results);
+  const data = results.results;
   return (
     <div>
       <Head>Hulu 2.0</Head>
       <Header />
       <Nav />
-      <Results results={results} />
+      <Results results={data} />
     </div>
   );
 }

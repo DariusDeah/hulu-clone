@@ -1,13 +1,12 @@
 const API_KEY = process.env.API_KEY;
-console.log(API_KEY + " is available in your  browser environment ");
 export default {
   fetchTrending: {
     title: "Trending",
     url: `/trending/all/week?api_key=${API_KEY}&language=en-US`,
   },
   fetchTopRated: {
-    title: "TopRated",
-    url: `/top_rated/all/week?api_key=${API_KEY}&language=en-US`,
+    title: "Top Rated",
+    url: `/movie/top_rated/?api_key=${API_KEY}&language=en-US`,
   },
   fetchActionMovies: {
     title: "Action",
