@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { Result } from "postcss";
 import React from "react";
 
 function Hero({ movie }) {
@@ -16,7 +17,12 @@ function Hero({ movie }) {
           }
           style={{ borderRadius: "0.7rem" }}
         />
-        <div className="absolute -bottom-10 left-0 w-full md:flex flex-col justify-center items-center bg-gradient-to-t from-[#0b0c0f] transparent h-80  " />
+        <div className="absolute -bottom-10  left-0 w-full md:flex flex-col justify-center items-center bg-gradient-to-t from-[#0b0c0f] transparent h-3/5  "></div>
+        <div className="absolute bottom-56 text-left  flex flex-col justify-items-start  ">
+          <h1 className="text-8xl  font-bold ">
+            {movie.title || movie.original_name}
+          </h1>
+        </div>
       </div>
     )
   );

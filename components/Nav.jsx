@@ -8,7 +8,7 @@ function Nav() {
   return (
     <nav className="relative">
       <div
-        className="-mt-40  mb-30 p-12 grid sm:grid  md:grid-cols-7 xl:flex-grow-0 whitespace-nowrap  space-x-2 3xl:flex flex-wrap justify-center  overflow-x-scroll scrollbar-hide "
+        className="-mt-72 bg-gradient-to-t from-[#0b0c0f]  mb-30 p-12 grid sm:grid  md:grid-cols-7 xl:flex-grow-0 whitespace-nowrap  space-x-2 3xl:flex flex-wrap justify-center  overflow-x-scroll scrollbar-hide "
         // className="flex -mt-48 mb-48 justify-center  sm:px-20   whitespace-nowrap space-x-10 sm:space-x-20 overflow-x-scroll scrollbar-hide  "
       >
         {Object.entries(requests).map(([key, { title, url }]) => (
@@ -25,7 +25,6 @@ function Nav() {
         ))}
       </div>
       {/* this is how we get the dissapering effect */}
-      <div className="absolute top-0 right-0 bg-gradient-to-l from-[#0b0c0f] h-10 w-1/12" />
     </nav>
   );
 }
