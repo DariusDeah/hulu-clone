@@ -7,6 +7,7 @@ import requests from "../utils/requests";
 
 export default function Home({ results, currentGenre }) {
   console.log(currentGenre);
+
   const data = results.results;
 
   let randomMovie;
@@ -32,6 +33,7 @@ export async function getServerSideProps(contex) {
       requests[genre]?.url || requests.fetchTrending.url
     }`
   ).then((res) => res.json());
+
   const currentGenre = requests[genre]?.title || requests.fetchTrending.title;
   return {
     props: {
