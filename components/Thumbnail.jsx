@@ -80,12 +80,6 @@ function Thumbnail({ result }) {
         <h2 className="mt-1 text-2xl text-white transition-all duration-100 ease-in-out group-hover:font-bold">
           {title}
         </h2>
-        {/* <p>
-          {result.media_type && `${result.media_type} - `}
-          {""}
-          {result.release_date || result.first_air_date} - {""}
-          <ThumbUpIcon className="h-5 mx-2" /> {result.vote_count}
-        </p> */}
       </div>
     </div>
   );
