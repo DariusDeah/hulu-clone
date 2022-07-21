@@ -7,6 +7,7 @@ const nextConfig = {
       "links.papareact.com",
       "image.tmdb.org",
       "cdn-icons-png.flaticon.com",
+      "images.unsplash.com",
     ],
   },
   env: {

@@ -1,5 +1,6 @@
 import Head from "next/head";
 import Header from "../components/Header";
+import Hero from "../components/Hero";
 import Nav from "../components/Nav";
 import Results from "../components/Results";
 import requests from "../utils/requests";
@@ -10,6 +11,7 @@ export default function Home({ results }) {
     <div>
       <Head>Hulu 2.0</Head>
       <Header />
+      <Hero img={data[7]} />
       <Nav />
       <Results results={data} />
     </div>
