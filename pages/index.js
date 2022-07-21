@@ -5,15 +5,21 @@ import Nav from "../components/Nav";
 import Results from "../components/Results";
 import requests from "../utils/requests";
 
-export default function Home({ results }) {
+export default function Home({ results, currentGenre }) {
+  console.log(currentGenre);
   const data = results.results;
+
+  let randomMovie;
+  if (data) {
+    randomMovie = data[Math.floor(Math.random() * data.length)];
+  }
   return (
     <div>
       <Head>Hulu 2.0</Head>
       <Header />
-      <Hero img={data[7]} />
+      <Hero movie={randomMovie} />
       <Nav />
-      <Results results={data} />
+      <Results results={data} genre={currentGenre} />
     </div>
   );
 }
@@ -26,10 +32,11 @@ export async function getServerSideProps(contex) {
       requests[genre]?.url || requests.fetchTrending.url
     }`
   ).then((res) => res.json());
-
+  const currentGenre = requests[genre]?.title || requests.fetchTrending.title;
   return {
     props: {
       results: request,
+      currentGenre,
     },
   };
 }

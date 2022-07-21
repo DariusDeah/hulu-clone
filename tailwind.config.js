@@ -9,6 +9,9 @@ module.exports = {
       screens: {
         "3xl": "2000px",
       },
+      fontSize: {
+        "4xl": "5rem",
+      },
     },
   },
   plugins: [require("tailwind-scrollbar-hide")],

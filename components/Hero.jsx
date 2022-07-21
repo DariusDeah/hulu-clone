@@ -1,19 +1,18 @@
 import Image from "next/image";
 import React from "react";
 
-function Hero({ img }) {
+function Hero({ movie }) {
   const BASE_IMG_URL = "https://image.tmdb.org/t/p/original/";
-  console.log(img);
   return (
-    img && (
+    movie && (
       <div className="px-5 my-10 h-auto relative ">
         <Image
           layout="responsive"
           height={1080}
           width={1920}
           src={
-            `${BASE_IMG_URL}${img.backdrop_path || img.poster_path}` ||
-            `${BASE_IMG_URL}${img.poster_path}`
+            `${BASE_IMG_URL}${movie.backdrop_path || movie.poster_path}` ||
+            `${BASE_IMG_URL}${movie.poster_path}`
           }
           style={{ borderRadius: "0.7rem" }}
         />
