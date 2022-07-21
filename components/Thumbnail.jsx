@@ -1,12 +1,13 @@
 import { ThumbUpIcon } from "@heroicons/react/outline";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import useMovieData from "../hooks/useMovieData";
 //i want a debounce action that will autoplay the movie trailer if the user is hovering over long enough
-const BASE_IMG_URL = "https://image.tmdb.org/t/p/original/";
 
 function Thumbnail({ result }) {
   const [trailers, setTrailers] = useState(null);
   const [hover, setHover] = useState(false);
+  const { img, title } = useMovieData(result);
   let thumbnailContent;
 
   const handleMouseEnter = () => {
@@ -59,10 +60,7 @@ function Thumbnail({ result }) {
         layout="responsive"
         height={1080}
         width={1920}
-        src={
-          `${BASE_IMG_URL}${result.backdrop_path || result.poster_path}` ||
-          `${BASE_IMG_URL}${result.poster_path}`
-        }
+        src={img}
         style={{
           borderRadius: ".5rem",
         }}
@@ -80,7 +78,7 @@ function Thumbnail({ result }) {
       <div className="p-2">
         <p className="truncate max-w-md">{result.overview}</p>
         <h2 className="mt-1 text-2xl text-white transition-all duration-100 ease-in-out group-hover:font-bold">
-          {result.title || result.original_name}
+          {title}
         </h2>
         {/* <p>
           {result.media_type && `${result.media_type} - `}

@@ -2,7 +2,6 @@ import Image from "next/image";
 import React from "react";
 
 function Avatar({ img, width, height }) {
-  console.log(width, height);
   return (
     <>
       <img
