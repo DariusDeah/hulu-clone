@@ -15,7 +15,7 @@ function Thumbnail({ result }) {
       `https://api.themoviedb.org/3/movie/${result.id}/videos?api_key=${API_KEY}&language=en-US`
     ).then((res) => res.json());
     setTrailer({
-      key: movieTrailerResults.results[2].key,
+      key: movieTrailerResults.results && movieTrailerResults.results[0].key,
     });
   };
 

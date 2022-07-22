@@ -8,6 +8,7 @@ const nextConfig = {
       "image.tmdb.org",
       "cdn-icons-png.flaticon.com",
       "images.unsplash.com",
+      "cdn-icons.flaticon.com",
     ],
   },
   env: {

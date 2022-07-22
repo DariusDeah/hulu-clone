@@ -17,7 +17,7 @@ function Hero({ movie }) {
         />
         <div className="absolute -bottom-10  left-0 w-full md:flex flex-col justify-center items-center bg-gradient-to-t from-[#0b0c0f] transparent h-3/5  "></div>
         <div className="absolute bottom-56 text-left  flex flex-col justify-items-start  ">
-          {/* {title && <h1 className="text-8xl  font-bold ">{title}</h1>} */}
+          {title && <h1 className="text-8xl  font-bold ">{title}</h1>}
         </div>
       </div>
     )

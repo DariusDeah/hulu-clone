@@ -18,16 +18,9 @@ function Header() {
         <HeaderItem title="Collections" Icon={CollectionIcon} />
         <HeaderItem title="Account" Icon={UserIcon} />
       </div>
-      {/* <Image
-        className="object-contain"
-        src="https://cdn-icons-png.flaticon.com/512/3522/3522336.png"
-        width={100}
-        height={80}
-      /> */}
+
       <Avatar
         className="object-contain"
-        height={14}
-        width={14}
         img="https://images.unsplash.com/photo-1635107510862-53886e926b74?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1335&q=80"
       />
     </header>
