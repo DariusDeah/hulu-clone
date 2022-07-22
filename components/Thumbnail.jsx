@@ -1,39 +1,33 @@
-import { ThumbUpIcon } from "@heroicons/react/outline";
 import Image from "next/image";
-import React, { useEffect, useState } from "react";
-import useHover from "../hooks/useHover";
+import React, { useState } from "react";
+import useDelayedHover from "../hooks/useDelayedHover";
 import useMovieData from "../hooks/useMovieData";
 import { API_KEY } from "../utils/requests";
 //i want a debounce action that will autoplay the movie trailer if the user is hovering over long enough
 
 function Thumbnail({ result }) {
-  const [trailers, setTrailers] = useState(null);
+  const [trailer, setTrailer] = useState(null);
   const { img, title } = useMovieData(result);
   let thumbnailContent;
 
-  const timeOut = setTimeout(() => {
-    const fetchMovieTrailers = async () => {
-      const movieTrailerResults = await fetch(
-        `https://api.themoviedb.org/3/movie/${result.id}/videos?api_key=${API_KEY}&language=en-US`
-      ).then((res) => res.json());
-      setTrailers([
-        {
-          key: movieTrailerResults.results[2].key,
-        },
-      ]);
-    };
-    fetchMovieTrailers();
-  }, 1500);
+  const fetchMovieTrailers = async () => {
+    const movieTrailerResults = await fetch(
+      `https://api.themoviedb.org/3/movie/${result.id}/videos?api_key=${API_KEY}&language=en-US`
+    ).then((res) => res.json());
+    setTrailer({
+      key: movieTrailerResults.results[2].key,
+    });
+  };
 
-  const { handleMouseEnter, handleMouseLeave, hover } = useHover(
-    () => timeOut,
-    clearTimeout(timeOut)
+  const { handleMouseEnter, handleMouseLeave, hover } = useDelayedHover(
+    fetchMovieTrailers,
+    1500
   );
 
-  if (hover && trailers && trailers.length) {
+  if (hover && trailer) {
     thumbnailContent = (
       <iframe
-        src={`https://www.youtube.com/embed/${trailers[0].key}?controls=0&autoplay=1&muted=1`}
+        src={`https://www.youtube.com/embed/${trailer.key}?controls=0&autoplay=1&muted=1`}
         title="YouTube video player"
         style={{ borderRadius: "1rem", width: "100%", height: "100%" }}
         frameborder="0"
@@ -41,6 +35,7 @@ function Thumbnail({ result }) {
         allowfullscreen
       ></iframe>
     );
+    console.log(trailer);
   }
 
   if (!hover) {

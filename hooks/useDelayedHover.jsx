@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useHover = (effect, cleanUp) => {
+const useDelyedHover = (effect, delay) => {
   const [hover, setHover] = useState(false);
 
   const handleMouseEnter = () => {
@@ -12,14 +12,16 @@ const useHover = (effect, cleanUp) => {
   };
 
   useEffect(() => {
+    console.log(hover);
+    let timeOut;
     if (hover) {
-      effect();
+      timeOut = setTimeout(effect, delay);
     }
     return () => {
-      cleanUp;
+      clearTimeout(timeOut);
     };
   }, [hover]);
 
   return { handleMouseEnter, handleMouseLeave, hover };
 };
-export default useHover;
+export default useDelyedHover;

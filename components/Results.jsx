@@ -6,7 +6,7 @@ function Results({ results, genre }) {
 
   return (
     <div>
-      <h2 className="px-5 text-4xl">{genre}</h2>
+      {/* <h2 className="px-5 text-4xl">{genre}</h2> */}
       <div className="px-5 my-10  sm:grid md:grid-cols-2 xl:grid-cols-4 3xl:flex flex-wrap justify-center ">
         {results &&
           results.map((result) => (

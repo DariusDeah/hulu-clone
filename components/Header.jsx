@@ -25,8 +25,9 @@ function Header() {
         height={80}
       /> */}
       <Avatar
-        height={12}
-        width={12}
+        className="object-contain"
+        height={14}
+        width={14}
         img="https://images.unsplash.com/photo-1635107510862-53886e926b74?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1335&q=80"
       />
     </header>
