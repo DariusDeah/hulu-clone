@@ -1,47 +1,36 @@
 import { ThumbUpIcon } from "@heroicons/react/outline";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
+import useHover from "../hooks/useHover";
 import useMovieData from "../hooks/useMovieData";
+import { API_KEY } from "../utils/requests";
 //i want a debounce action that will autoplay the movie trailer if the user is hovering over long enough
 
 function Thumbnail({ result }) {
   const [trailers, setTrailers] = useState(null);
-  const [hover, setHover] = useState(false);
   const { img, title } = useMovieData(result);
   let thumbnailContent;
 
-  const handleMouseEnter = () => {
-    setHover(true);
-  };
+  const timeOut = setTimeout(() => {
+    const fetchMovieTrailers = async () => {
+      const movieTrailerResults = await fetch(
+        `https://api.themoviedb.org/3/movie/${result.id}/videos?api_key=${API_KEY}&language=en-US`
+      ).then((res) => res.json());
+      setTrailers([
+        {
+          key: movieTrailerResults.results[2].key,
+        },
+      ]);
+    };
+    fetchMovieTrailers();
+  }, 1500);
 
-  const handleMouseLeave = () => {
-    setHover(false);
-  };
-
-  useEffect(() => {
-    if (hover) {
-      const timeOut = setTimeout(() => {
-        const fetchMovieTrailers = async () => {
-          const movieTrailerResults = await fetch(
-            `https://api.themoviedb.org/3/movie/${result.id}/videos?api_key=f769ce3c4434058a152234a26d21961f&language=en-US`
-          ).then((res) => res.json());
-          setTrailers([
-            {
-              key: movieTrailerResults.results[2].key,
-            },
-          ]);
-        };
-        fetchMovieTrailers();
-      }, 1500);
-
-      return () => {
-        clearTimeout(timeOut);
-      };
-    }
-  }, [hover]);
+  const { handleMouseEnter, handleMouseLeave, hover } = useHover(
+    () => timeOut,
+    clearTimeout(timeOut)
+  );
 
   if (hover && trailers && trailers.length) {
-    console.log(trailers[0].key);
     thumbnailContent = (
       <iframe
         src={`https://www.youtube.com/embed/${trailers[0].key}?controls=0&autoplay=1&muted=1`}
