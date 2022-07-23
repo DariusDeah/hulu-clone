@@ -1,6 +1,8 @@
+import { useRouter } from "next/router";
 import React, { useRef, useState } from "react";
 
 function SignUpForm() {
+  const router = useRouter();
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -24,6 +26,7 @@ function SignUpForm() {
       )
     );
   };
+
   const validateIsValidName = (name) => name < 2;
   const validateIsValidEmail = (email) => email.includes("@");
   const validateIsValidPassword = (password) => password.length >= 8;
@@ -36,6 +39,11 @@ function SignUpForm() {
         className="flex md:w-2/3 flex-col bg-white rounded-lg p-4 md:p-14 group space-y-7 font-bold"
         onSubmit={handleFormSubmit}
       >
+        {router.query.bundle === "1" && (
+          <h2 className="text-green-500 text-center font-bold text-3xl">
+            Bundle Pack
+          </h2>
+        )}
         <label htmlFor="name">Name</label>
         <input
           type="text"

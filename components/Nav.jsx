@@ -4,7 +4,6 @@ import requests from "../utils/requests";
 import Card from "./Card";
 
 function Nav() {
-  const router = useRouter();
   return (
     <nav className="relative">
       <div

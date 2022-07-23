@@ -2,8 +2,6 @@ import React from "react";
 import Thumbnail from "./Thumbnail";
 
 function Results({ results, genre }) {
-  console.log(results);
-
   return (
     <div>
       <h2 className="px-5 text-4xl">{genre}</h2>
