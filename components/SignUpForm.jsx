@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 function SignUpForm() {
   const router = useRouter();
@@ -15,23 +15,53 @@ function SignUpForm() {
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
+    if (
+      nameRef.current.value.length &&
+      isValidName &&
+      passwordRef.current.value.length &&
+      isValidEmail &&
+      emailRef.current.value.length &&
+      isValidPassword &&
+      confirmPasswordRef.current.value.length &&
+      isValidConfirmPassword
+    ) {
+      console.log({
+        name: nameRef.current.value,
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+      });
+    }
+  };
 
+  const handleNameBlur = () => {
     setIsValidName(validateIsValidName(nameRef.current.value));
+  };
+
+  const handleEmailBlur = () => {
     setIsValidEmail(validateIsValidEmail(emailRef.current.value));
+  };
+
+  const handlePasswordBlur = () => {
     setIsValidPassword(validateIsValidPassword(passwordRef.current.value));
+  };
+
+  const handleConfirmPasswordBlur = () => {
     setIsValidConfirmPassword(
       validateIsValidConfirmPassword(
-        passwordRef,
+        passwordRef.current.value,
         confirmPasswordRef.current.value
       )
     );
   };
 
-  const validateIsValidName = (name) => name < 2;
+  const validateIsValidName = (name) => name.length > 2;
   const validateIsValidEmail = (email) => email.includes("@");
   const validateIsValidPassword = (password) => password.length >= 8;
   const validateIsValidConfirmPassword = (originalPassword, passwordConfirm) =>
     passwordConfirm === originalPassword;
+  useEffect(() => {
+    nameRef.current.focus();
+  }, []);
 
   return (
     <div className=" w-full  flex text-black p-5 justify-center my-8">
@@ -50,6 +80,7 @@ function SignUpForm() {
           name="name"
           className="p-3 rounded-md bg-gray-200"
           ref={nameRef}
+          onBlur={handleNameBlur}
         />
         {!isValidName && <p className="text-red-500 ">Invalid Name</p>}
 
@@ -59,6 +90,7 @@ function SignUpForm() {
           name="email"
           className="p-3 rounded-md bg-gray-200"
           ref={emailRef}
+          onBlur={handleEmailBlur}
         />
         {!isValidEmail && (
           <p className="text-red-500 ">Invalid Email, email must conatain @</p>
@@ -70,6 +102,7 @@ function SignUpForm() {
           name="password"
           className="p-3 rounded-md bg-gray-200"
           ref={passwordRef}
+          onBlur={handlePasswordBlur}
         />
         {!isValidPassword && (
           <p className="text-red-500 ">
@@ -92,6 +125,7 @@ function SignUpForm() {
           name="password-Confirm"
           className="p-3 rounded-md bg-gray-200"
           ref={confirmPasswordRef}
+          onBlur={handleConfirmPasswordBlur}
         />
         {!isValidConfirmPassword && (
           <p className="text-red-500 ">passwords must match</p>

@@ -7,8 +7,6 @@ function SignInForm() {
     e.prevenDefault();
     console.log(emailRef.current.value, passwordRef.current.value);
   };
-  ``;
-
   return (
     <div className=" w-full  md:flex text-black   md:justify-center align-middle p-12 my-8 ">
       <form
