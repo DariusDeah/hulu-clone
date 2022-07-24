@@ -2,7 +2,8 @@ import { gql } from "apollo-server";
 
 export interface IUser {
   id: string;
-  name: string;
+  first_name: string;
+  last_name: string;
   email: string;
   password?: string;
   photo: string;
@@ -12,7 +13,8 @@ export interface IUser {
 export const typeDefs = gql`
   type User {
     id: ID!
-    name: String!
+    first_name: String!
+    last_name: String!
     email: String!
     password: String!
     photo: String!
@@ -21,6 +23,7 @@ export const typeDefs = gql`
   type Query {
     users: [User]
   }
+
   type Mutation {
     createUser(id: ID!, name: String!, email: String!, password: String!): User
   }

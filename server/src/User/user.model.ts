@@ -1,9 +1,11 @@
 import { Table, FieldSet } from "airtable";
-import table from "airtable/lib/table";
-import { base } from "../server";
+import { IBASETABLE } from "../../interfaces/baseTable";
+export class User implements IBASETABLE<FieldSet> {
+  private table;
 
-class User {
-  private table: Table<FieldSet> = base(DB_BASES.User);
+  constructor(table: Table<FieldSet>) {
+    this.table = table;
+  }
 
   async selectRecords() {
     try {
@@ -13,11 +15,15 @@ class User {
           view: "Grid view",
         })
         .firstPage();
-      console.log(records);
+      const users: FieldSet[] = [];
+
+      records.forEach((record) => {
+        users.push(record.fields);
+      });
+
+      return users;
     } catch (error) {
       console.error(error);
     }
   }
 }
-
-export const userTable = new User();
