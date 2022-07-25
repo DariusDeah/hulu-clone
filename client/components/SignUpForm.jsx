@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
 import { stockImages } from "../utils/stockUserImages";
 
-function SignUpForm() {
+function SignUpForm({ onSubmit }) {
   const router = useRouter();
 
   const nameRef = useRef();
@@ -30,7 +30,15 @@ function SignUpForm() {
       confirmPasswordRef.current.value.length &&
       isValidConfirmPassword
     ) {
-      router.push("/");
+      const userData = {
+        firstName: nameRef.current.value.split(" ")[0],
+        lastName: nameRef.current.value.split(" ")[1],
+        email: emailRef.current.value,
+        password: passwordRef.current.value,
+        photo: userPhoto,
+      };
+
+      onSubmit(userData);
     }
   };
 
