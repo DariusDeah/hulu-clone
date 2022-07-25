@@ -1,31 +1,37 @@
 import { useMutation } from "@apollo/client";
 import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import LogoHeader from "../components/LogoHeader";
 import SignUpForm from "../components/SignUpForm";
 import { createUser } from "../graphql/user";
+import userSlice, { createNewUser, userSelector } from "../redux/userSlice";
+import { createUserRequest, useCreateUser } from "../requests/user";
 
 function SignUp() {
   const router = useRouter();
+  const dispatch = useDispatch();
+  const user = useSelector(userSelector);
 
-  const [createUserMutation, { data, loading, error }] =
-    useMutation(createUser);
-
-  const handleSignUp = (userData) => {
-    createUserMutation({
-      variables: {
-        first_name: userData.firstName,
-        last_name: userData.lastName,
-        email: userData.email,
-        password: userData.password,
-        photo: userData.photo,
-      },
-    });
-
-    if (data && !error) {
-      router.push("/");
-      console.log(data);
-    }
+  const handleSignUp = async (userData) => {
+    const { data, errors } = await createUserRequest(userData);
+    console.log(data);
+    const { id, email, first_name, last_name, photo } = data;
+    dispatch(
+      createNewUser({
+        id,
+        email,
+        firstName: first_name,
+        lastName: last_name,
+        photo,
+      })
+    );
+    router.push("/");
   };
+
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
 
   return (
     <div>
