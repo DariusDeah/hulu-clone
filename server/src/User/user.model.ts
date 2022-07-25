@@ -61,7 +61,11 @@ export class User implements IBASETABLE<FieldSet, IUser> {
       record.forEach((record) => {
         user = record.fields;
       });
-      console.log(user);
+
+      if (!user) {
+        throw new Error(`Record ${query} not found`);
+      }
+
       return user;
     } catch (error) {
       console.error(error);

@@ -33,5 +33,7 @@ export const typeDefs = gql`
       password: String!
       photo: String!
     ): User
+
+    login(email: String!, password: String!): User
   }
 `;
