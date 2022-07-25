@@ -1,22 +1,38 @@
 import { Table, FieldSet } from "airtable";
 import { IBASETABLE } from "../../interfaces/baseTable";
-export class User implements IBASETABLE<FieldSet> {
+import { IUser } from "./user.typeDef";
+import { v4 as uuidv4 } from "uuid";
+export class User implements IBASETABLE<FieldSet, IUser> {
   private table;
 
   constructor(table: Table<FieldSet>) {
     this.table = table;
   }
 
+  async insertRecord(data: IUser) {
+    try {
+      const createdRecord = await this.table.create({
+        id: uuidv4(),
+        first_name: data.first_name,
+        last_name: data.last_name,
+        email: data.email,
+        password: data.password,
+        photo: data.photo,
+      });
+      return createdRecord.fields;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
   async selectRecords(query?: string) {
     try {
       const records = await this.table
         .select({
-          maxRecords: 3,
           view: "Grid view",
           fields: ["first_name", "last_name", "email", "id", "photo"],
           filterByFormula: query ?? "",
         })
-
         .firstPage();
 
       const users: FieldSet[] = [];
@@ -24,7 +40,7 @@ export class User implements IBASETABLE<FieldSet> {
       records.forEach((record) => {
         users.push(record.fields);
       });
-
+      console.log(users);
       return users;
     } catch (error) {
       console.error(error);

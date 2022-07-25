@@ -1,6 +1,10 @@
 import { userService } from "./user.service";
+import { IUser } from "./user.typeDef";
 
 class UserResolver {
+  async createUser(user: IUser) {
+    return await userService.createUser(user);
+  }
   async findUsers() {
     const users = await userService.findUsers();
     return users;

@@ -13,10 +13,11 @@ export const resolvers = {
   },
 
   Mutation: {
-    createUser: (user: IUser) => {
-      mockUsers.push(user);
-      const createdUser = mockUsers.find((user) => user.id === user.id);
-      return createdUser;
+    async createUser(parent: any, args: any, context: any, info: any) {
+      const { email, first_name, last_name, password, photo } = args;
+      const user: IUser = { email, first_name, last_name, password, photo };
+
+      return await userResolvers.createUser(user);
     },
   },
 };
