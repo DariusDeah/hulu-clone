@@ -38,7 +38,7 @@ class UserService {
       user["password"],
       password
     );
-    console.log(isValidPassword, user["password"], password);
+
     if (!isValidPassword) {
       throw new Error(`invalid login`);
     }

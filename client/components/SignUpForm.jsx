@@ -5,15 +5,16 @@ import { stockImages } from "../utils/stockUserImages";
 
 function SignUpForm() {
   const router = useRouter();
+
   const nameRef = useRef();
   const emailRef = useRef();
   const passwordRef = useRef();
   const confirmPasswordRef = useRef();
 
-  const [isValidName, setIsValidName] = useState(true);
-  const [isValidEmail, setIsValidEmail] = useState(true);
-  const [isValidPassword, setIsValidPassword] = useState(true);
-  const [isValidConfirmPassword, setIsValidConfirmPassword] = useState(true);
+  const [isValidName, setIsValidName] = useState(false);
+  const [isValidEmail, setIsValidEmail] = useState(false);
+  const [isValidPassword, setIsValidPassword] = useState(false);
+  const [isValidConfirmPassword, setIsValidConfirmPassword] = useState(false);
   const [userPhoto, setUserPhoto] = useState("");
 
   const handleFormSubmit = (e) => {
@@ -29,12 +30,6 @@ function SignUpForm() {
       confirmPasswordRef.current.value.length &&
       isValidConfirmPassword
     ) {
-      console.log({
-        name: nameRef.current.value,
-        email: emailRef.current.value,
-        password: passwordRef.current.value,
-        photo: userPhoto,
-      });
       router.push("/");
     }
   };
