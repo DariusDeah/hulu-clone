@@ -38,10 +38,11 @@ class UserService {
       user["password"],
       password
     );
-
-    if (isValidPassword) {
-      return user;
+    console.log(isValidPassword, user["password"], password);
+    if (!isValidPassword) {
+      throw new Error(`invalid login`);
     }
+    return user;
   }
 }
 

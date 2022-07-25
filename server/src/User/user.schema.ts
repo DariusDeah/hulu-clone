@@ -19,5 +19,10 @@ export const resolvers = {
 
       return await userResolvers.createUser(user);
     },
+
+    async login(parent: any, args: any, context: any, info: any) {
+      const { email, password } = args;
+      return await userResolvers.login(email, password);
+    },
   },
 };

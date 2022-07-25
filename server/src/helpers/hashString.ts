@@ -7,5 +7,5 @@ export const hashString = async (str: string) => {
 };
 
 export const compareHashAndString = async (hash: string, str: string) => {
-  return bcrypt.compare(hash, str);
+  return await bcrypt.compare(hash, str);
 };
