@@ -1,9 +1,5 @@
 import { useMutation } from "@apollo/client";
-import Image from "next/image";
 import { useRouter } from "next/router";
-import { useState } from "react";
-import BundleDisplay from "../components/BundleDisplay";
-import HeaderItem from "../components/HeaderItem";
 import LogoHeader from "../components/LogoHeader";
 import SignUpForm from "../components/SignUpForm";
 import { createUser } from "../graphql/user";
@@ -25,9 +21,10 @@ function SignUp() {
       },
     });
 
-    console.log(userData);
-    console.log(data);
-    // router.push("/");
+    if (data && !error) {
+      router.push("/");
+      console.log(data);
+    }
   };
 
   return (
