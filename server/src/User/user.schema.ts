@@ -6,6 +6,10 @@ import { IUser } from "./user.typeDef";
 export const resolvers = {
   Query: {
     users: async () => await userResolvers.findUsers(),
+    async user(parent: any, args: any, context: any, info: any) {
+      console.log(args.email);
+      return await userResolvers.findUserByEmail(args.email);
+    },
   },
 
   Mutation: {

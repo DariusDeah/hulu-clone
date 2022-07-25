@@ -16,12 +16,13 @@ export const typeDefs = gql`
     first_name: String!
     last_name: String!
     email: String!
-    password: String!
+    password: String
     photo: String!
   }
 
   type Query {
     users: [User]
+    user(email: String): User
   }
 
   type Mutation {

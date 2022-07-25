@@ -5,5 +5,9 @@ class UserResolver {
     const users = await userService.findUsers();
     return users;
   }
+  async findUserByEmail(email: string) {
+    const user = await userService.findUserByEmail(email);
+    return user;
+  }
 }
 export const userResolvers = new UserResolver();
