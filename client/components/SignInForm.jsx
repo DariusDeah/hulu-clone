@@ -1,10 +1,15 @@
 import React, { useRef } from "react";
 
-function SignInForm() {
+function SignInForm({ onSubmit }) {
   const emailRef = useRef();
   const passwordRef = useRef();
   const handleFormSubmit = (e) => {
-    e.prevenDefault();
+    e.preventDefault();
+
+    onSubmit({
+      email: emailRef.current.value,
+      password: passwordRef.current.value,
+    });
   };
   return (
     <div className=" w-full  md:flex text-black   md:justify-center align-middle p-12 my-8 ">

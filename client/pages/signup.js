@@ -29,10 +29,6 @@ function SignUp() {
     router.push("/");
   };
 
-  useEffect(() => {
-    console.log(user);
-  }, [user]);
-
   return (
     <div>
       <LogoHeader />

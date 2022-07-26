@@ -45,3 +45,27 @@ export async function createUserRequest({
 
   return { data: data.createUser, errors };
 }
+
+export const signinUserRequest = async ({ email, password }) => {
+  const { data, errors } = await client.mutate({
+    mutation: gql`
+      mutation login($email: String!, $password: String!) {
+        login(email: $email, password: $password) {
+          id
+          first_name
+          last_name
+          email
+          photo
+        }
+      }
+    `,
+    variables: {
+      email,
+      password,
+    },
+  });
+  return {
+    data: data.login,
+    errors,
+  };
+};
